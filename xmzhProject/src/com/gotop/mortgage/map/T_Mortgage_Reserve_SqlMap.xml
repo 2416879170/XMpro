@@ -256,8 +256,19 @@
        t.other_warrants_number OTHERWARRANTSNUMBER,
        t.borrower_name BORROWERNAME,
        t.borrower_cardno BORROWERCARDNO,
-       t.status
+       t.status,
+       t2.property_name HCNAME,
+       t2.property_no HCNO
   from t_warrants_info t
+  left join (
+select g.warrants_id,
+       wmsys.wm_concat(to_char((g.property_name))) property_name,
+       wmsys.wm_concat(to_char((g.property_no))) property_no
+  from t_mortgage_house_info g
+ group by g.warrants_id
+) t2
+on t.id=t2.warrants_id
+  
  where 1=1
 	 <isNotNull prepend="and" property="mortgageType" >
 	  t.mortgage_type='$mortgageType$'
@@ -348,6 +359,126 @@
 	 </isNotNull>
     order by id
   </select>  
+  
+  
+  
+  
+   
+  <select id="queryMortgageReserveListCar" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+	select t.id WARRANTSID,
+       t.other_type OTHERTYPE,
+       t.project_number PROJECTNUMBER,
+       t.loan_type LOANTYPE,
+       t.other_warrants_number OTHERWARRANTSNUMBER,
+       t.borrower_name BORROWERNAME,
+       t.borrower_cardno BORROWERCARDNO,
+       t.status,
+       t2.car_name HCNAME,
+       t2.car_registerno HCNO
+  from t_warrants_info t
+  left join (
+select g.warrants_id,
+       wmsys.wm_concat(to_char((g.car_name))) car_name,
+       wmsys.wm_concat(to_char((g.car_registerno))) car_registerno
+  from t_mortgage_car_info g
+ group by g.warrants_id
+) t2
+on t.id=t2.warrants_id
+ where 1=1
+	 <isNotNull prepend="and" property="mortgageType" >
+	  t.mortgage_type='$mortgageType$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="otherType" >
+	  t.other_type='$otherType$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="projectNumber" >
+	  t.project_number='$projectNumber$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="status" >
+	  t.status='$status$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="afterMortgageStatus" >
+	  t.after_mortgage_status='$afterMortgageStatus$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="borrowerName" >
+	  t.borrower_name like '%$borrowerName$%'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="borrowerCardNo" >
+	  t.borrower_cardno like '%$borrowerCardNo$%'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="otherWarrantsNumber" >
+	  t.other_warrants_number like '%$otherWarrantsNumber$%'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="loanType" >
+	  t.loan_type='$loanType$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="orgCode" >
+	  t.org_code='$orgCode$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="noRegisterSign" >
+	  t.no_register_sign='$noRegisterSign$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="propertyName" >
+	  exists  (select h.warrants_id
+	  from t_mortgage_house_info h
+	 where t.id=h.warrants_id and h.property_name like '%$propertyName$%' 
+	  )
+	 </isNotNull>
+	 <isNotNull prepend="and" property="propertyCardNo" >
+	  exists  (select h.warrants_id
+	  from t_mortgage_house_info h
+	 where t.id=h.warrants_id and h.property_cardno like '%$propertyCardNo$%'
+	  )
+	 </isNotNull>  
+	 <isNotNull prepend="and" property="propertyNo" >
+	  exists  (select h.warrants_id
+	  from t_mortgage_house_info h
+	 where t.id=h.warrants_id and h.property_no like '%$propertyNo$%'
+	  )
+	 </isNotNull>  
+	 <isNotNull prepend="and" property="propertyAddres" >
+	  exists (select h.warrants_id
+	  from t_mortgage_house_info h
+	 where t.id=h.warrants_id and  h.property_addres like '%$propertyAddres$%'
+	  )
+	 </isNotNull>
+	 <isNotNull prepend="and" property="carRegisterno" >
+	  exists (select o.warrants_id
+		  from t_mortgage_car_info o
+		 where t.id=o.warrants_id and  o.car_registerno like '%$carRegisterno$%')
+	 </isNotNull>
+	 <isNotNull prepend="and" property="carNo" >
+	  exists  (select o.warrants_id
+		  from t_mortgage_car_info o
+		 where t.id=o.warrants_id and o.car_no like '%$carNo$%')
+	 </isNotNull>
+	 <isNotNull prepend="and" property="carFrameNo" >
+	  exists (select o.warrants_id
+		  from t_mortgage_car_info o
+		 where t.id=o.warrants_id and o.car_frameno like '%$carFrameNo$%')
+	 </isNotNull>
+	 <isNotNull prepend="and" property="carInvoiceNo" >
+	  exists (select o.warrants_id
+		  from t_mortgage_car_info o
+		 where t.id=o.warrants_id and o.car_invoiceno like '%$carInvoiceNo$%')
+	 </isNotNull>
+	 <isNotNull prepend="and" property="carDuesNo" >
+	  exists (select o.warrants_id
+		  from t_mortgage_car_info o
+		 where t.id=o.warrants_id and o.car_duesno like '%$carDuesNo$%')
+	 </isNotNull>
+	 <isNotNull prepend="and" property="carSafeNo" >
+	  exists (select o.warrants_id
+		  from t_mortgage_car_info o
+		 where t.id=o.warrants_id and o.car_safeno like '%$carSafeNo$%')
+	 </isNotNull>
+    order by id
+  </select> 
+  
+  
+  
+  
+  
    
   <select id="queryMortgageReserveHouseList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
 	select t.id WARRANTSID,
@@ -790,7 +921,6 @@ select    o.id,
    EMPID)
 select o.id,
        o.mortgage_type,
-       mortgage_type,
        other_type,
        project_number,
        other_warrants_number,
@@ -1552,25 +1682,12 @@ select o.id,
        kk.status STATUS,
        kk.after_mortgage_status AFTER_MORTGAGE_STATUS,
        to_char(to_date(kk.insert_time,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi') INSERTTIME,
-       <isEqual property="mortgageType" compareValue="1">
        kk.property_no PROPERTYNO,
        kk.property_name PROPERTYNAME,
        kk.property_cardno PROPERTYCARDNO,
        kk.property_addres PROPERTYADDRES,
        kk.property_nums PROPERTYNUMS,
        kk.property_date PROPERTYDATE,
-       </isEqual>
-       
-       <isEqual property="mortgageType" compareValue="2">
-       kk.car_name CARNAME,
-       kk.car_cardno CARCARDNO,
-       kk.car_registerno CARREGISTERNO,
-       kk.car_no CARNO,
-       kk.car_frameno CARFRAMENO,
-       kk.car_invoiceno CARINVOICENO,
-       kk.car_duesno CARDUESNO,
-       kk.car_safeno CARSAFENO,
-       </isEqual>
        row_number() OVER(PARTITION BY kk.id ORDER BY kk.project_number) RN
   from T_WARRANTS_UPD_LOG kk
  where 1=1
@@ -1589,6 +1706,56 @@ select o.id,
   	</select>
   	
   	
+  	<!-- 查询库存变更信息日志 -->
+  	<select id="queryDetailCollCar"  parameterClass="java.util.HashMap"   resultClass="java.util.HashMap">
+  	select
+       kk.mortgage_type MORTGAGETYPE,
+       kk.other_type OTHERTYPE,
+       kk.empname EMPNAME, 
+       kk.project_number PROJECTNUMBER,
+       kk.other_warrants_number OTHERWARRANTSNUMBER,
+       kk.other_warrants_date OTHERWARRANTSDATE,
+       kk.borrower_name BORROWERNAME,
+       kk.borrower_cardno BORROWERCARDNO,
+       kk.ORG_NAME ORGNAME,
+       kk.manger_name MANGERNAME,
+       kk.loan_type LOANTYPE,
+       kk.borrower_contractno BORROWERCONTRACTNO,
+       kk.loan_years LOANYEARS,
+       kk.record_value RECORDVALUE,
+       kk.packet_number PACKETNUMBER,
+       kk.next_name NEXTNAME,
+       kk.purchase_number PURCHASENUMBER,
+       kk.remark REMARK,
+       kk.no_register_sign NOREGISTERSIGN,
+       kk.status STATUS,
+       kk.after_mortgage_status AFTER_MORTGAGE_STATUS,
+       to_char(to_date(kk.insert_time,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi') INSERTTIME,
+     
+       kk.car_name CARNAME,
+       kk.car_cardno CARCARDNO,
+       kk.car_registerno CARREGISTERNO,
+       kk.car_no CARNO,
+       kk.car_frameno CARFRAMENO,
+       kk.car_invoiceno CARINVOICENO,
+       kk.car_duesno CARDUESNO,
+       kk.car_safeno CARSAFENO,
+       row_number() OVER(PARTITION BY kk.id ORDER BY kk.project_number) RN
+  from T_WARRANTS_UPD_LOG kk
+ where 1=1
+	 <isNotNull prepend="and" property="warrantsId" >
+	   kk.warrants_id='$warrantsId$'
+	 </isNotNull>
+	 <isNotNull prepend="and" property="mortgageType" >
+        kk.mortgage_type = '$mortgageType$'
+	 </isNotNull>
+	 
+	 <isNotNull prepend="and" property="empName" >
+        kk.empname like'%$empName$%'
+	 </isNotNull>
+	 order by id
+	
+  	</select>
   	
   	
   	

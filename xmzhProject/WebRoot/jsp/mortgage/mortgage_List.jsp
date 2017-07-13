@@ -156,10 +156,10 @@
 								库存序号
 						  </th>
 						   <th nowrap="nowrap">
-								贷款种类
+								产权人姓名/车主姓名
 						  </th>
 						   <th nowrap="nowrap">
-								他项权证号
+								产权证号/机动车登记证号
 						  </th>
 						   <th nowrap="nowrap">
 								借款人姓名
@@ -187,10 +187,10 @@
 									<b:write iterateId="id2" property="PROJECTNUMBER" />
 								</td>
 								<td nowrap="nowrap"> 
-									<d:write  iterateId="id2" dictTypeId="LOAN_TYPE_VIEW" property="LOANTYPE"/>
+									<b:write iterateId="id2" property="HCNAME" />
 								</td>
 								<td nowrap="nowrap"> 
-									<b:write iterateId="id2" property="OTHERWARRANTSNUMBER" />
+									<b:write iterateId="id2" property="HCNO" />
 								</td>
 								<td nowrap="nowrap"> 
 									<b:write iterateId="id2" property="BORROWERNAME" />

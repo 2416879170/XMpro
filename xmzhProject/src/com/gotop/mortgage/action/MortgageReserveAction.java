@@ -264,6 +264,7 @@ public class MortgageReserveAction extends BaseAction {
 	 * @return
 	 */
 	public String toUpdColl(){
+		String res="upd_collateral_info";
 		String id=mortgageReserveRes.getWarrantsId();
 		String mortgageType=mortgageReserveRes.getMortgageType();
 		mortgageReserve=mortgageReserveService.queryMortgageReserveListInfo(id,mortgageType);
@@ -273,9 +274,11 @@ public class MortgageReserveAction extends BaseAction {
 		}else if ("2".equals(mortgageType)){
 			mortgageReserveListCarInfo=mortgageReserveService.queryMortgageReserveListCarInfo(id);
 			this.setMortgageReserveListCarInfo(mortgageReserveListCarInfo);
+			res="upd_collateral_info_car";
 		}
 		this.setMortgageReserve(mortgageReserve);
-		return "upd_collateral_info";
+		
+		return res ;
 	}
 	
 	/**

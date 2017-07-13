@@ -82,6 +82,8 @@ public class MortgageReserveService implements IMortgageReserveService {
 				map.put("status", "2");
 				map.put("afterMortgageStatus", "2");
 			}
+
+			mortgageReserveList=mortgageReserveDao.queryMortgageReserveList(map, page);
 		}else if("2".equals(mortgageType)){
 			if(!"".equals(mortgageReserveCar.getCarRegisterNo())&&mortgageReserveCar.getCarRegisterNo()!=null){
 				map.put("carRegisterno", mortgageReserveCar.getCarRegisterNo());
@@ -101,8 +103,9 @@ public class MortgageReserveService implements IMortgageReserveService {
 			if(!"".equals(mortgageReserveCar.getCarSafeNo())&&mortgageReserveCar.getCarSafeNo()!=null){
 				map.put("carSafeNo", mortgageReserveCar.getCarSafeNo());
 			}
+
+			mortgageReserveList=mortgageReserveDao.queryMortgageReserveListCar(map, page);
 		}
-		mortgageReserveList=mortgageReserveDao.queryMortgageReserveList(map, page);
 		return mortgageReserveList;
 	}
 	@Override
@@ -289,6 +292,7 @@ public class MortgageReserveService implements IMortgageReserveService {
 			//判断是否已经有记录了
 			isLog(pkey,mortgageType);
 			String empName=muo.getEmpname();
+			System.out.println("iiiiiiii:"+mortgageReserveCar.getId());
 			resMortgageReserveLogMap(mortgageReserve,mortgageReserveHouse,mortgageReserveCar,empName,userID);
 			result=mortgageReserveDao.updMortgage(map);
             try {
@@ -527,6 +531,7 @@ public class MortgageReserveService implements IMortgageReserveService {
 					mortgageReserveDao.insertMortgageUpdLog(map);
 				}
 			}else if ("2".equals(mortgageType)){
+				System.out.println("ppppp"+mortgageReserveCar.getId());
 				String [] resId=mortgageReserveCar.getId().split(",");
 				String [] resCarCardNo=mortgageReserveCar.getCarCardNo().split(",");
 				String [] resCarDuesNo=mortgageReserveCar.getCarDuesNo().split(",");
@@ -1171,7 +1176,11 @@ public class MortgageReserveService implements IMortgageReserveService {
        if(!"".equals(mortgageReserveRes.getEmpName())&&mortgageReserveRes.getEmpName()!=null){
    		map.put("empName", mortgageReserveRes.getEmpName());
        }
-		mortgageReserveList=mortgageReserveDao.queryDetailColl(map);
+       if("1".equals(mortgageReserveRes.getMortgageType())){
+   		mortgageReserveList=mortgageReserveDao.queryDetailColl(map);
+       }else if ("2".equals(mortgageReserveRes.getMortgageType())){
+    	   mortgageReserveList=mortgageReserveDao.queryDetailCollCar(map);
+       }
 		return mortgageReserveList;
 	}
 	@Override

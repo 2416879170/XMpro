@@ -25,7 +25,11 @@ public class MortgageReserveDao extends SqlMapClientDao implements
 		return this.queryForList("T_Mortgage_Reserve_SqlMap.queryMortgageReserveList", map,page);
 	}
 
-	
+	@Override
+	public List<MortgageReserveRes> queryMortgageReserveListCar(
+			Map<String, Object> map, Page page) {
+		return this.queryForList("T_Mortgage_Reserve_SqlMap.queryMortgageReserveListCar", map,page);
+	}
 
 	
 	@Override
@@ -338,6 +342,16 @@ public class MortgageReserveDao extends SqlMapClientDao implements
 	public String queryCarNums(Map<String, Object> map) {
 		Object obj =this.queryForObject("T_Mortgage_Reserve_SqlMap.queryCarNums", map);
 		return String.valueOf(obj);
+	}
+
+
+
+
+	@Override
+	public List<MortgageReserveUpdLog> queryDetailCollCar(
+			Map<String, Object> map) {
+
+		return this.queryForList("T_Mortgage_Reserve_SqlMap.queryDetailCollCar", map);
 	}
 
 }

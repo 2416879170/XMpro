@@ -34,6 +34,9 @@
 	      <result name="upd_collateral_info" >
 	        /jsp/mortgage/upd_collateral_info.jsp
 	      </result>
+	      <result name="upd_collateral_info_car" >
+	        /jsp/mortgage/upd_collateral_info_car.jsp
+	      </result>
 	      <result name="list1" type="json">
 			   <param name="root">fileResourceTables</param>
 		  </result>

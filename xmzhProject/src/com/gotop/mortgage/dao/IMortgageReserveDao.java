@@ -21,6 +21,14 @@ public interface IMortgageReserveDao {
 	 */
 	List<MortgageReserveRes> queryMortgageReserveList(Map<String, Object> map, Page page);
 	
+	/**
+	 * 查询抵押品库存
+	 * @param mortgageReserve
+	 * @param page
+	 * @return
+	 */
+	List<MortgageReserveRes> queryMortgageReserveListCar(Map<String, Object> map, Page page);
+	
 	
 	/**
 	 * 查询抵押品房产类型库存导出
@@ -285,12 +293,20 @@ public interface IMortgageReserveDao {
 	
 	
 	/**
-	 * 查询机动车类型押品信息详情
+	 * 查询房产类型押品信息详情
 	 * @param mortgageReserve
 	 * @param page
 	 * @return
 	 */
 	List<MortgageReserveUpdLog> queryDetailColl(Map<String, Object> map);
+	
+	/**
+	 * 查询机动车类型押品信息详情
+	 * @param mortgageReserve
+	 * @param page
+	 * @return
+	 */
+	List<MortgageReserveUpdLog> queryDetailCollCar(Map<String, Object> map);
 	
 
 	/**

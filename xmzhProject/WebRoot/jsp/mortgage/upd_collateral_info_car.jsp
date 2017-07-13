@@ -32,8 +32,7 @@
 				</td>		
 				<td class="form_label" align="right" width="15%" nowrap="nowrap">他项类型：</td>
 				<td colspan="1" width="30%" nowrap="nowrap">
-					<d:select id="otherTypeFC" dictTypeId="OTHER_TYPE_HOUSE" property="mortgageReserve.otherTypeFC"  nullLabel="请选择"  onchange="changeOtherTypeFC(this.value)" ></d:select>
-				
+					<d:select id="otherTypeJDC" dictTypeId="OTHER_TYPE_CAR" property="mortgageReserve.otherTypeJDC" ></d:select>
 				</td>						
 			</tr>
 			<tr>					
@@ -77,7 +76,7 @@
 				</td>	
 				<td class="form_label" align="right" width="15%" nowrap="nowrap">贷款种类：</td>
 				<td colspan="1" width="30%" nowrap="nowrap">
-					<d:select id="loanTypeFC" dictTypeId="LOAN_TYPE_HOUSE" property="mortgageReserve.loanTypeFC" nullLabel="请选择" ></d:select>
+					<d:select id="loanTypeJDC" dictTypeId="LOAN_TYPE_CAR" property="mortgageReserve.loanTypeJDC" nullLabel="请选择" ></d:select>
 				</td>						
 			</tr>
 			<tr>
@@ -138,46 +137,54 @@
 	        		抵质押品信息
 	          </td>
 	        </tr>
-			<tr id="row2">
+			<tr id="row3">
 		     <td class="form_label" align="right">抵质押品列表：</td>
 		     <td colspan="3">
-		     <form id="form1" runat="server">
-		     <table width="100%" id="ListArea" border="0" class="EOS_table" >
-		      <tr align="center">
-		            <th nowrap="nowrap">产权证号</th>
-		            <th nowrap="nowrap">产权人姓名</th>
-		            <th nowrap="nowrap">产权人身份证号</th>
-		            <th nowrap="nowrap">产权地址</th>
-		            <th nowrap="nowrap">产权证本数</th>
-		            <th nowrap="nowrap">产权证填发日期</th>
+		     <form id="form2" runat="server">
+		     <table width="100%" id="ListArea" border="0" class="EOS_table" > 
+		     <tr align="center">
+		            <th nowrap="nowrap">车主姓名</th>
+		            <th nowrap="nowrap">车主身份证号</th>
+		            <th nowrap="nowrap">机动车登记证号</th>
+		            <th nowrap="nowrap">车牌号</th>
+		            <th nowrap="nowrap">车架号</th>
+		            <th nowrap="nowrap">购车发票号</th>
+		            <th nowrap="nowrap">完税证明号</th>
+		            <th nowrap="nowrap">保单号</th>
+		      </tr>
+			  <l:iterate property="mortgageReserveListCarInfo" id="id5">
+			   <tr align="center">
+		            <td nowrap="nowrap"> 
+	        		  <h:hidden id="idCar"   iterateId="id5" property="mortgageReserveCar.id"  value="${id5.ID }"/>
+	        		  <h:hidden id="warrantsId"   iterateId="id5" property="mortgageReserveCar.warrantsId"  value="${id5.WARRANTSID }"/>
+			    	  <h:text id="carName" size="5"   iterateId="id5"  property="mortgageReserveCar.carName" value="${id5.CARNAME }"  /> 
+		            </td>
+		            <td nowrap="nowrap"> 
+		              <h:text id="carCardNo" size="12"   iterateId="id5"  property="mortgageReserveCar.carCardNo" value="${id5.CARCARDNO }"  />
+		            </td>
+		            <td nowrap="nowrap"> 
+		              <h:text id="carRegisterNo" size="10"  iterateId="id5"  property="mortgageReserveCar.carRegisterNo" value="${id5.CARREGISTERNO }" />
+		            </td>
+		            <td nowrap="nowrap"> 
+		              <h:text id="carNo" iterateId="id5" size="8"   property="mortgageReserveCar.carNo" value="${id5.CARNO }" />
+		            </td>
+		            <td nowrap="nowrap"> 
+		            <h:text id="carFrameNo" iterateId="id5" size="8"   property="mortgageReserveCar.carFrameNo" value="${id5.CARFRAMENO }"  />
+		            </td>
+		            <td nowrap="nowrap"> 
+		              <h:text id="carInvoiceNo"  iterateId="id5" size="10"  property="mortgageReserveCar.carInvoiceNo" value="${id5.CARINVOICENO }"  />
+		            </td>
+		            <td nowrap="nowrap"> 
+		              <h:text id="carDuesNo" iterateId="id5" size="10"   property="mortgageReserveCar.carDuesNo" value="${id5.CARDUESNO }" />
+		            </td>
+		            <td nowrap="nowrap"> 
+		              <h:text id="carSafeNo"  iterateId="id5" size="10"  property="mortgageReserveCar.carSafeNo" value="${id5.CARSAFENO }"  />
+		            </td>
 		        </tr>
-		        <l:iterate property="mortgageReserveListHouseInfo" id="id3" >
-		        <tr align="center">
-		            <td nowrap="nowrap"> 
-	        		 <h:hidden id="idHouse"   iterateId="id3" property="mortgageReserveHouse.id"  value="${id3.ID }"/>
-	        		 <h:hidden id="warrantsId"   iterateId="id3" property="mortgageReserveHouse.warrantsId"  value="${id3.WARRANTSID }"/>
-			    	 <h:text id="propertyNo"  size="12"  iterateId="id3" property="mortgageReserveHouse.propertyNo"  value="${id3.PROPERTYNO }" validateAttr="allowNull=false;"/><font style="color: red">*</font>
-		            </td>
-		            <td nowrap="nowrap"> 
-		            <h:text id="propertyName"  size="8" iterateId="id3" property="mortgageReserveHouse.propertyName" value="${id3.PROPERTYNAME }" validateAttr="allowNull=false;"/><font style="color: red">*</font>
-		            </td>
-		            <td nowrap="nowrap"> 
-		            <h:text id="propertyCardNo" size="12" iterateId="id3" property="mortgageReserveHouse.propertyCardNo" value="${id3.PROPERTYCARDNO }" />
-		            </td>
-		            <td nowrap="nowrap"> 
-		            <h:text id="propertyAddres"  iterateId="id3" property="mortgageReserveHouse.propertyAddres" value="${id3.PROPERTYADDRES }" validateAttr="allowNull=false;"/><font style="color: red">*</font>
-		            </td>
-		            <td nowrap="nowrap"> 
-		            <h:text id="propertyNums"  size="5"  iterateId="id3" property="mortgageReserveHouse.propertyNums" value="${id3.PROPERTYNUMS }"  validateAttr="type=naturalNumber;"/>
-		            </td>
-		            <td nowrap="nowrap"> 
-		            <h:text  iterateId="id3"    property="mortgageReserveHouse.propertyDate" value="${id3.PROPERTYDATE }" validateAttr="type=naturalNumber;maxLength=8;"/> 
-		            </td>
-		        </tr>
-		       </l:iterate>
-		     </table>
-		     </form>
-			 </td>
+			</l:iterate>
+		    </table>
+		    </form>
+			</td>
             </tr>
 			<tr>
 				<td colspan="4" style="text-align: center"><input type="button" value="保存"
@@ -189,6 +196,7 @@
 	</h:form>
 <script type="text/javascript">
 
+        
         
 $(document).ready(function(){
  $.ajax({
