@@ -223,6 +223,16 @@
 	  			var row=gop.getSelectRow();
     			var id = row.getParam("id");
     			var operatingId=row.getParam("operatingId");
+    			showStatus(id);
+    			var afterMortgageStatus=$("#afterMortgageStatus").val();
+    			 if(afterMortgageStatus==1){
+    			    alert("抵押品不在库,不能进行入库撤销动作");
+    			    return;
+    			  }
+    			  if(afterMortgageStatus==3){
+    			    alert("抵押品已领取,不能进行入库撤销动作");
+    			    return;
+    			  }
     			if(checkIsBack(id,operatingId)){
 	    			var logRemark=row.getParam("logRemark");
 	    			var nextName=row.getParam("nextName");
@@ -282,10 +292,7 @@
     			var status=$("#status").val();
     			var afterMortgageStatus=$("#afterMortgageStatus").val();
     			//如果系统状态是正常的话,则只显示外借
-    			if(status==1){
-    			   signType=1;
-    			}else{
-    			  signType=3;
+    			
     			  if(afterMortgageStatus==3&&param==2){
     			    alert("抵押品已领取,不能进行入库处理");
     			    return;
@@ -302,6 +309,10 @@
     			    alert("抵押品不在库,不能进行入库处理");
     			    return;
     			  }
+    			if(status==1){
+    			   signType=1;
+    			}else{
+    			  signType=3;
     			  if(param==1&&inBorrowerLogInfo==2&&afterMortgageStatus==2&&status==2){
     			    signType=2;
     			  }
