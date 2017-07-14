@@ -149,11 +149,11 @@
 						<th align="center" nowrap="nowrap">
 								<b:message key="l_select"></b:message>
 							</th>
-						  <th nowrap="nowrap">
-								他项类型
-						  </th>
 						   <th nowrap="nowrap">
 								库存序号
+						  </th>
+						  <th nowrap="nowrap">
+								他项权证号
 						  </th>
 						   <th nowrap="nowrap">
 								产权人姓名/车主姓名
@@ -181,10 +181,10 @@
 									</w:rowRadio>
 								</td>
 								<td nowrap="nowrap"> 
-								 <d:write  iterateId="id2" dictTypeId="OTHER_TYPE_VIEW" property="OTHERTYPE"/>
+									<b:write iterateId="id2" property="PROJECTNUMBER" />
 								</td>
 								<td nowrap="nowrap"> 
-									<b:write iterateId="id2" property="PROJECTNUMBER" />
+									<b:write iterateId="id2" property="OTHERWARRANTSNUMBER" />
 								</td>
 								<td nowrap="nowrap"> 
 									<b:write iterateId="id2" property="HCNAME" />

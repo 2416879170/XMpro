@@ -292,7 +292,6 @@ public class MortgageReserveService implements IMortgageReserveService {
 			//判断是否已经有记录了
 			isLog(pkey,mortgageType);
 			String empName=muo.getEmpname();
-			System.out.println("iiiiiiii:"+mortgageReserveCar.getId());
 			resMortgageReserveLogMap(mortgageReserve,mortgageReserveHouse,mortgageReserveCar,empName,userID);
 			result=mortgageReserveDao.updMortgage(map);
             try {
@@ -531,7 +530,6 @@ public class MortgageReserveService implements IMortgageReserveService {
 					mortgageReserveDao.insertMortgageUpdLog(map);
 				}
 			}else if ("2".equals(mortgageType)){
-				System.out.println("ppppp"+mortgageReserveCar.getId());
 				String [] resId=mortgageReserveCar.getId().split(",");
 				String [] resCarCardNo=mortgageReserveCar.getCarCardNo().split(",");
 				String [] resCarDuesNo=mortgageReserveCar.getCarDuesNo().split(",");
