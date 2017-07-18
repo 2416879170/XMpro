@@ -30,7 +30,8 @@
     <result column="PURCHASE_NUMBER" property="purchaseNumber" jdbcType="VARCHAR" />               
     <result column="REMARK" property="remark" jdbcType="VARCHAR" />                   
     <result column="NO_REGISTER_SIGN" property="noRegisterSign" jdbcType="VARCHAR" />                        
-    <result column="status" property="status" jdbcType="VARCHAR" />                           
+    <result column="status" property="status" jdbcType="VARCHAR" />                            
+    <result column="INSERTTIME" property="insertTime" jdbcType="VARCHAR" />                                           
     <result column="AFTER_MORTGAGE_STATUS" property="afterMortgageStatus" jdbcType="VARCHAR" />                               
   </resultMap> 
 
@@ -61,6 +62,8 @@
        t.remark REMARK,
        t.no_register_sign NO_REGISTER_SIGN,
        t.status STATUS,
+       to_char(to_date(t.insert_time, 'yyyy-mm-dd hh24:mi:ss'),
+               'yyyy-mm-dd') INSERTTIME,
        t.after_mortgage_status AFTER_MORTGAGE_STATUS
   from t_warrants_info t
   left join OM_ORGANIZATION O

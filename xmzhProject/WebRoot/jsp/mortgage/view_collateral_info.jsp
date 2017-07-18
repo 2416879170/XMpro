@@ -115,8 +115,12 @@
 			</tr>
 			<tr>				
 				<td class="form_label" align="right" width="15%">注销后抵质押品状态：</td>
-				<td colspan="3" width="30%">
+				<td colspan="1" width="30%">
 				<d:write  dictTypeId="AFTER_MORTGAGE_STATUS" property="mortgageReserve.afterMortgageStatus"/>
+				</td>		
+				<td class="form_label" align="right" width="15%">入库时间：</td>
+				<td colspan="1" width="30%">
+				<b:write   property="mortgageReserve.insertTime"/> 
 				</td>				
 			</tr>
 		    <tr id="row1">
