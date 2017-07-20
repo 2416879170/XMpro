@@ -76,7 +76,7 @@
 	<resultMap class="InventoryStat" id="timeMap">
 		<result property="statTime" jdbcType="string" column="STATTIME"/>
 	</resultMap>
-	<!-- 库存统计 房产 -->
+	<!-- 库存统计 房产  -->
 	<select id="queryInventoryStatListByHouse" parameterClass="java.util.HashMap" resultMap="inventoryStatMap">
 <!--  select '$statTime$' STATTIME,
        decode(grouping(T.LOAN_TYPE) + grouping(T.OTHER_TYPE),
@@ -658,7 +658,6 @@ select mm.*,
        and mm.MORTGAGE_TYPE=j.mortgagetype
        and mm.WARRANTS_TYPE=j.warrantstype
        and mm.loan_type=j.loantype  
-       and mm.OTHER_TYPE=j.othertype
        ),0) as ZTNUMS
 from(
 
@@ -838,15 +837,28 @@ from(
                ]]>
      </isNotNull> -->
  GROUP BY GROUPING SETS(('房产','产权证', gg.LOAN_TYPE, gg.OTHER_TYPE),(gg.LOAN_TYPE),())
- 
+   ) mm
+) nn
+
   union all 
- 
+  
+select nn.*,nvl(nn.num-nn.ztnums,0) as subnums from (
+select mm.*,
+       nvl((
+       select  j.NUM from T_WARRANTS_INVENTORY_STAT j
+       where 1=1
+       and j.STATTIME =  to_char(to_date($statTime$,'yyyymmdd')-1,'yyyymmdd')
+       and mm.MORTGAGE_TYPE=j.mortgagetype
+       and mm.WARRANTS_TYPE=j.warrantstype
+       and mm.loan_type=j.loantype  
+       ),0) as ZTNUMS
+from( 
 select 
        '$statTime$' STATTIME,
-       '机动车','他项',
+       '机动车' as MORTGAGE_TYPE,'他项' as WARRANTS_TYPE,
        decode(gg.loan_type, 7, '汽车消费', 8, '经营性车辆贷款', '合计') loan_type,
        '' OTHER_TYPE,
-       sum(NUMS)
+       sum(NUMS) as NUM
   from (select 
                substr(t.insert_time,0,8) INSERT_TIME,
                t.mortgage_type,
@@ -909,7 +921,9 @@ select mm.*,
        and mm.MORTGAGETYPE=j.mortgagetype
        and mm.WARRANTSTYPE=j.warrantstype
        and mm.loantype=j.loantype  
+       <isEqual  property="mortgageType" compareValue="房产">
        and mm.OTHERTYPE=j.othertype
+       </isEqual>
        ),0) as ZTNUMS
 from(
 	  select  * from T_WARRANTS_INVENTORY_STAT 
