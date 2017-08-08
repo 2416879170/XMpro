@@ -88,8 +88,18 @@ public class TApproveOpninion implements Serializable {
      * 20140902
      */
     private String nextorgname;
+    
+    private String title;
 
-    /**
+    public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	/**
      * 意见编号 .
      * @abatorgenerated
      */

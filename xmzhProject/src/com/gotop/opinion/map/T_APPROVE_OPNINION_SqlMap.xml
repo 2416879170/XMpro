@@ -527,13 +527,33 @@
   </select> -->
   <!-- 20140902显示所属机构名称 -->
   <select id="queryOpninions" resultClass="com.gotop.opinion.model.TApproveOpninion" parameterClass="java.util.HashMap">
-  	select a.REC_ID as recId, a.RESOURCE_ID as resourceId, a.RESOURCE_TYPE as resourceType, a.OPNINION_CONTENT as opninionContent,
-   a.OPERATOR_TYPE as operatorType, a.OPERATOR as operator,next_opr_name as nextOprName,next_org_name as nextOrgName,
-     to_char(TO_DATE(a.OPERATER_DATE || a.OPERATER_TIME, 'yyyy/MM/dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')  as operaterDate,a.OPERATER_TIME as operaterTime, a.NODE_ID as nodeId, a.ORGID as orgid,c.orgname, a.NODE_NAME as nodeName,b.empname as empname
-    from T_APPROVE_OPNINION a,om_employee b,om_organization c
-    where 
-       a.OPERATOR=b.empid and a.RESOURCE_ID = #resourceId:DECIMAL# and a.RESOURCE_TYPE=#resourceType# and a.orgid = c.orgid
-        order by a.rec_id desc
+  	select A.*,B.COM_TITLE as title
+  FROM
+ ( select a.REC_ID as recId,
+         a.RESOURCE_ID as resourceId,
+         a.RESOURCE_TYPE as resourceType,
+         a.OPNINION_CONTENT as opninionContent,
+         a.OPERATOR_TYPE as operatorType,
+         a.OPERATOR as operator,
+         next_opr_name as nextOprName,
+         next_org_name as nextOrgName,
+         to_char(TO_DATE(a.OPERATER_DATE || a.OPERATER_TIME,
+                         'yyyy/MM/dd hh24:mi:ss'),
+                 'yyyy-mm-dd hh24:mi:ss') as operaterDate,
+         a.OPERATER_TIME as operaterTime,
+         a.NODE_ID as nodeId,
+         a.ORGID as orgid,
+         c.orgname,
+         a.NODE_NAME as nodeName,
+         b.empname as empname
+    from T_APPROVE_OPNINION a, om_employee b, om_organization c
+   where a.OPERATOR = b.empid
+     and a.RESOURCE_ID = #resourceId:DECIMAL#
+     and a.RESOURCE_TYPE = #resourceType#
+     and a.orgid = c.orgid) A
+     left join t_common_process B
+     on A.resourceId=B.REC_ID
+   order by A.recId desc
   </select>
   <select id="receiveResourceId" resultClass="String" parameterClass="java.util.HashMap">
   	
