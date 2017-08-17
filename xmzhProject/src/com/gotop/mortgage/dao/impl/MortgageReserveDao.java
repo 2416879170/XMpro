@@ -171,6 +171,11 @@ public class MortgageReserveDao extends SqlMapClientDao implements
 	}
 
 
+	@Override
+	public boolean insertUpdHouserNums(Map<String, Object> map) {
+		this.insert("T_Mortgage_Reserve_SqlMap.insertUpdHouserNums", map);
+		return true;
+	}
 
 	@Override
 	public String checkCarRegisterNo(Map<String, Object> map) {

@@ -390,6 +390,8 @@ public class MortgageReserveService implements IMortgageReserveService {
 			String [] resPropertyName=mortgageReserveHouse.getPropertyName().split(",");
 			String [] resPropertyNo=mortgageReserveHouse.getPropertyNo().split(",");
 			String [] resPropertyNums=mortgageReserveHouse.getPropertyNums().split(",");
+			String [] resOldPropertyNums=mortgageReserveHouse.getOldpropertyNums().split(",");
+			String [] resWarrantsId=mortgageReserveHouse.getWarrantsId().split(",");
 			for (int i = 0; i <resId.length; i++) {
 				Map<String, Object>map=new HashMap<String, Object>();
 				map.put("id", resId[i].trim());
@@ -397,13 +399,33 @@ public class MortgageReserveService implements IMortgageReserveService {
 				map.put("propertyName",resPropertyName[i].trim());
 				map.put("propertyCardNo", resPropertyCardNo[i].trim());
 				map.put("propertyAddres", resPropertyAddres[i].trim());
+				String tmpWarrantsId=resWarrantsId[i].trim();
 				String temp=resPropertyNums[i].trim();
+				String oldtemp=resOldPropertyNums[i].trim();
 				if("".equals(temp)||temp==null){
 					temp="0";
 				}
+				
 				map.put("propertyNums", temp);
 				map.put("propertyDate", resPropertyDate[i].trim());
 				result=mortgageReserveDao.updMortgageHouse(map);
+				map.put("warrantsId", tmpWarrantsId);
+				int oTemp=Integer.valueOf(oldtemp);
+				int newTemp=Integer.valueOf(temp);
+				if(newTemp>oTemp){
+					map.put("remark", "数量增加"+(newTemp-oTemp)+"本");
+					map.put("outInType", "2");
+					map.put("operatingMatters", "7");
+					map.put("otherWarrantsNums", "0");
+					mortgageReserveDao.insertUpdHouserNums(map);	
+				}else if(newTemp<oTemp){
+					map.put("remark", "数量减少"+(oTemp-newTemp)+"本");
+					map.put("outInType", "1");
+					map.put("operatingMatters", "7");
+					map.put("otherWarrantsNums", "0");
+					mortgageReserveDao.insertUpdHouserNums(map);	
+					
+				}
 			}
 			result=true;
 		} catch (Exception e) {
@@ -413,6 +435,7 @@ public class MortgageReserveService implements IMortgageReserveService {
 		return result;
 	}
 	
+
 
 	/**
 	 * 更新押品信息押品类型为机动车时

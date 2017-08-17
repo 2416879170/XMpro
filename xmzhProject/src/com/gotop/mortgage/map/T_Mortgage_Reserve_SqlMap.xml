@@ -1277,7 +1277,30 @@ select o.id,
 	</insert>
 	
 	
-	
+	<!-- 房产数量更改时插入出入库记录-->
+	<insert id="insertUpdHouserNums" parameterClass="java.util.HashMap">
+    <![CDATA[
+		insert into T_MORTGAGE_LIST 
+			(WARRANTS_ID, 
+			OPERATING_MATTERS,
+			REMARK,
+			INSERT_TIME,
+			type,
+			house_warrants_nums,
+			other_warrants_nums,
+			OPERATING_ID)
+		values
+			('$warrantsId$',
+			'$operatingMatters$', 
+			'$remark$', 
+			 to_char(sysdate,'yyyymmddhh24miss'),
+			'$outInType$',
+			'$propertyNums$',
+			'$otherWarrantsNums$',
+			'$operatingId$')
+		
+	]]>
+	</insert>
 	
 	  
   <select id="queryMortgageReserveListExcel" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">

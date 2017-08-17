@@ -338,6 +338,13 @@ public interface IMortgageReserveDao {
 	 * 查询机动车证本数
 	 */
 	String queryCarNums(Map<String, Object> map);
+	
+	/**
+	 * 房产数量更改时插入出入库记录
+	 * @param map
+	 * @return
+	 */
+    boolean insertUpdHouserNums(Map<String, Object> map) ;
 
 
 }

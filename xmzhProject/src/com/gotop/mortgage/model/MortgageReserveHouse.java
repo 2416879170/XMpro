@@ -12,6 +12,7 @@ public class MortgageReserveHouse {
 	private String propertyAddres;
 	private String propertyNums;
 	private String propertyDate;
+	private String oldpropertyNums;
 	public String getId() {
 		return id;
 	}
@@ -59,6 +60,12 @@ public class MortgageReserveHouse {
 	}
 	public void setPropertyDate(String propertyDate) {
 		this.propertyDate = propertyDate;
+	}
+	public String getOldpropertyNums() {
+		return oldpropertyNums;
+	}
+	public void setOldpropertyNums(String oldpropertyNums) {
+		this.oldpropertyNums = oldpropertyNums;
 	}
 
 	

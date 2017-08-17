@@ -156,6 +156,7 @@
 		            <td nowrap="nowrap"> 
 	        		 <h:hidden id="idHouse"   iterateId="id3" property="mortgageReserveHouse.id"  value="${id3.ID }"/>
 	        		 <h:hidden id="warrantsId"   iterateId="id3" property="mortgageReserveHouse.warrantsId"  value="${id3.WARRANTSID }"/>
+		            <h:hidden id="oldpropertyNums" iterateId="id3" property="mortgageReserveHouse.oldpropertyNums" value="${id3.PROPERTYNUMS }" />
 			    	 <h:text id="propertyNo"  size="12"  iterateId="id3" property="mortgageReserveHouse.propertyNo"  value="${id3.PROPERTYNO }" validateAttr="allowNull=false;"/><font style="color: red">*</font>
 		            </td>
 		            <td nowrap="nowrap"> 
