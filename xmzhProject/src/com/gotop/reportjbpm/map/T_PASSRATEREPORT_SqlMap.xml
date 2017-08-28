@@ -9,7 +9,11 @@
     <result column="LOANCATEGORY" property="loanCategory" jdbcType="VARCHAR" />
     <result column="REVIEWEMPNAME" property="reviewEmpname" jdbcType="VARCHAR" />
     <result column="APPROVALEMPNAME" property="approvalEmpname" jdbcType="VARCHAR" />
+    <result column="PASSONE_NUM" property="passone_num" jdbcType="VARCHAR" />
+    <result column="SCSP_ONE_ALLNUM" property="scsp_one_allnum" jdbcType="VARCHAR" />
     <result column="PASSONE_RATE" property="passone_rate" jdbcType="VARCHAR" />
+    <result column="PASSTWO_NUM" property="passtwo_num" jdbcType="VARCHAR" />
+    <result column="SCSP_TWO_ALLNUM" property="scsp_two_allnum" jdbcType="VARCHAR" />
     <result column="PASSTWO_RATE" property="passtwo_rate" jdbcType="VARCHAR" />
   </resultMap>
 	
@@ -171,10 +175,10 @@ temp6 as /* temp6:最终连接后的大表。包含一级、二级机构、一�
 /* 最终的查询表 */
 select tt.*, o1.orgname as orgnameone, o2.orgname as orgnametwo
   from (select t.*,
-               t1.passone_num,
-               t2.passtwo_num,
-               t3.scsp_one_allnum,
-               t4.scsp_two_allnum,
+               nvl(t1.passone_num,0) passone_num,
+               nvl(t2.passtwo_num,0) passtwo_num,
+               nvl(t3.scsp_one_allnum,0) scsp_one_allnum,
+               nvl(t4.scsp_two_allnum,0) scsp_two_allnum, 
                /* scsp_one_allnum="审查一-->审批一"经过一次及以上的流程数量,scsp_two_allnum="审查一-->审批一"经过两次及以上的流程数量 */
                case
                  when t1.passone_num is not null then

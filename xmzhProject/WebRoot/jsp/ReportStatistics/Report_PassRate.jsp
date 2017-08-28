@@ -116,7 +116,19 @@
 								审批人员
 					       </th>
 							<th nowrap="nowrap">
+								一次通过笔数
+					       </th>
+							<th nowrap="nowrap">
+								一次通过总笔数
+					       </th>
+							<th nowrap="nowrap">
 								一次通过率
+					       </th>
+							<th nowrap="nowrap">
+								二次通过笔数
+					       </th>
+							<th nowrap="nowrap">
+								二次通过总笔数
 					       </th>
 					       <th nowrap="nowrap">
 								二次通过率
@@ -143,7 +155,19 @@
 									<b:write iterateId="id1" property="approvalEmpname" />
 								</td>
 								<td nowrap="nowrap"> 
+									<b:write iterateId="id1" property="passone_num" />
+								</td>
+								<td nowrap="nowrap"> 
+									<b:write iterateId="id1" property="scsp_one_allnum" />
+								</td>
+								<td nowrap="nowrap"> 
 									<b:write iterateId="id1" property="passone_rate" />
+								</td>
+								<td nowrap="nowrap"> 
+									<b:write iterateId="id1" property="passtwo_num" />
+								</td>
+								<td nowrap="nowrap"> 
+									<b:write iterateId="id1" property="scsp_two_allnum" />
 								</td>
 								<td nowrap="nowrap"> 
 									<b:write iterateId="id1" property="passtwo_rate" />

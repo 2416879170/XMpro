@@ -42,6 +42,35 @@ public class PassRateReport implements Serializable {
 	private String passtwo_rate;
 	
 	
+	private String passone_num;
+	private String scsp_one_allnum;
+	private String passtwo_num;
+	private String scsp_two_allnum;
+	
+	public String getPassone_num() {
+		return passone_num;
+	}
+	public String getScsp_one_allnum() {
+		return scsp_one_allnum;
+	}
+	public String getPasstwo_num() {
+		return passtwo_num;
+	}
+	public String getScsp_two_allnum() {
+		return scsp_two_allnum;
+	}
+	public void setPassone_num(String passone_num) {
+		this.passone_num = passone_num;
+	}
+	public void setScsp_one_allnum(String scsp_one_allnum) {
+		this.scsp_one_allnum = scsp_one_allnum;
+	}
+	public void setPasstwo_num(String passtwo_num) {
+		this.passtwo_num = passtwo_num;
+	}
+	public void setScsp_two_allnum(String scsp_two_allnum) {
+		this.scsp_two_allnum = scsp_two_allnum;
+	}
 	public String getRepTimeStart() {
 		return repTimeStart;
 	}
