@@ -119,7 +119,7 @@
 								一次通过笔数
 					       </th>
 							<th nowrap="nowrap">
-								一次通过总笔数
+								一次派单笔数
 					       </th>
 							<th nowrap="nowrap">
 								一次通过率
@@ -128,7 +128,7 @@
 								二次通过笔数
 					       </th>
 							<th nowrap="nowrap">
-								二次通过总笔数
+								二次派单笔数
 					       </th>
 					       <th nowrap="nowrap">
 								二次通过率

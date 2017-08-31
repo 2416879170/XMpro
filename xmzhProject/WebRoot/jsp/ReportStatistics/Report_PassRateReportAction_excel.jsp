@@ -21,7 +21,11 @@
 		<th height="34" width="100" align="center" class="form_label">贷种分类</th>
 		<th height="34" width="100" align="center" class="form_label">审查人员</th>
 		<th height="34" width="100" align="center" class="form_label">审批人员</th>
+		<th height="34" width="100" align="center" class="form_label">一次通过笔数</th>
+		<th height="34" width="100" align="center" class="form_label">一次派单笔数</th>
 		<th height="34" width="100" align="center" class="form_label">一次通过率</th>
+		<th height="34" width="100" align="center" class="form_label">二次通过笔数</th>
+		<th height="34" width="100" align="center" class="form_label">二次派单笔数</th>
 		<th height="34" width="100" align="center" class="form_label">二次通过率</th>
 	</tr>
 	<l:iterate property="passRateReportList" id="id1">
@@ -45,7 +49,19 @@
 			   <b:write iterateId="id1" property="approvalEmpname"/>
 			  </td>
 			   <td>
+			   <b:write iterateId="id1" property="passone_num"/>
+			  </td>
+			   <td>
+			   <b:write iterateId="id1" property="scsp_one_allnum"/>
+			  </td>
+			   <td>
 			   <b:write iterateId="id1" property="passone_rate"/>
+			  </td>
+			   <td>
+			    <b:write iterateId="id1" property="passtwo_num"/>
+			  </td>
+			   <td>
+			    <b:write iterateId="id1" property="scsp_two_allnum"/>
 			  </td>
 			   <td>
 			    <b:write iterateId="id1" property="passtwo_rate"/>
