@@ -258,7 +258,7 @@
 									<b:write iterateId="id1" property="replyTime" />
 								</td>
 								<td style="vnd.ms-excel.numberformat:@"> 
-									<b:write iterateId="id1" property="" />
+									<b:write iterateId="id1" property="remark" />
 								</td>
 			</tr>
 			</l:iterate>
